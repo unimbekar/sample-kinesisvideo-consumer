@@ -11,7 +11,7 @@ import com.example.aws.kinesisvideo.base.AbstractKinesisVideoConsumer;
 
 public class FrameFileStoreConsumer extends AbstractFrameExtractorConsumer {
 
-	private static final String FRAME_DIRECATORY = System.getProperty("frame.directory", "images");
+	private static final String FRAME_DIRECTORY = System.getProperty("frame.directory", "images");
 	private static final String FRAME_FILE_PREFIX = System.getProperty("frame.file.prefix", "frame-");
 	// jpg, jpeg, bmp, png etc.
 	private static final String FRAME_FILE_FORMAT = System.getProperty("frame.file.format", "jpg");
@@ -19,7 +19,7 @@ public class FrameFileStoreConsumer extends AbstractFrameExtractorConsumer {
 
 	public FrameFileStoreConsumer() {
 		super();
-		File directory = new File(FRAME_DIRECATORY);
+		File directory = new File(FRAME_DIRECTORY);
 		if (!directory.exists()) {
 			directory.mkdirs();
 		}
@@ -27,7 +27,7 @@ public class FrameFileStoreConsumer extends AbstractFrameExtractorConsumer {
 
 	@Override
 	protected void process(BufferedImage imageFrame) {
-		String fileName = FRAME_DIRECATORY + "/" + FRAME_FILE_PREFIX + frameCount + "." + FRAME_FILE_FORMAT;
+		String fileName = FRAME_DIRECTORY + "/" + FRAME_FILE_PREFIX + frameCount + "." + FRAME_FILE_FORMAT;
 		File outputfile = new File(fileName);
 		try {
 			ImageIO.write(imageFrame, FRAME_FILE_FORMAT, outputfile);
